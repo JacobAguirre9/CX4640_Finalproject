@@ -9,6 +9,7 @@ Title: A case study of Stochastic Optimization techniques
 - [Background](#background)
 - [Algorithms](#algorithms)
 - [Discussion](#discussion)
+- [Pseudocode](#pseudocode)
 - [References](#references)
 
 # Introduction
@@ -135,7 +136,75 @@ $$\begin{aligned} V_{k+1}(s) &= \max_{a \in \mathcal{A}} \sum_{s' \in \mathcal{S
 This formula represents the update step in value policy iteration, where $V_k$ is the current estimate of the value function, $V_{k+1}$ is the updated estimate of the value function, $\pi_k$ is the current policy, and $\pi_{k+1}$ is the updated policy. In each iteration of the algorithm, the value function is updated based on the current policy, and then the policy is updated based on the updated value function. This process is repeated until the policy converges to the optimal policy.
 
 
+# Pseudocode
 
+Here, we will briefly provide psuedocode for how to perform the three main algorithms discussed above. First, we will tackle SGD. 
+
+SGD(X, y, learning_rate, num_iterations)
+    
+    for i in range(num_iterations):
+        # Randomly select a subset of the data
+        x_subset, y_subset = select_subset(X, y)
+        
+        # Compute the gradient of the objective function with respect to the model parameters
+        grad = compute_gradient(x_subset, y_subset, model_parameters)
+        
+        # Update the model parameters in the direction of the negative gradient
+        model_parameters = update_parameters(model_parameters, grad, learning_rate)
+        
+    return model_parameters
+    
+    In this pseudocode, X and y are the training data, learning_rate is the step size for updating the model parameters, num_iterations is the number of iterations to perform, select_subset() is a function for selecting a subset of the training data, compute_gradient() is a function for computing the gradient of the objective function with respect to the model parameters, and update_parameters() is a function for updating the model parameters in the direction of the negative gradient.
+    
+
+Now, we provide pseudocode for Bellman's equation. 
+
+Pseudocode for Bellman's equation is an iterative method for finding the optimal action-value function in a Markov decision process (MDP). Bellman's equation is a recursive relationship that defines the optimal action-value function in terms of the optimal action-value functions of the next states that can be reached from the current state.
+
+The pseudocode for Bellman's equation is as follows:
+
+Bellman(state, action, rewards, next_states, gamma)
+    
+    # Initialize the value of the action-value function to the immediate reward
+    action_value = rewards[state][action]
+
+    # Iterate over the next states that can be reached from the current state
+    for next_state in next_states[state][action]:
+        # Compute the value of the next state using the optimal action-value function
+        next_state_value = Bellman(next_state, optimal_action(next_state), rewards, next_states, gamma)
+        
+        # Update the action-value function to include the value of the next state
+        action_value += gamma * next_state_value
+
+    return action_value
+
+In this pseudocode, state is the current state in the MDP, action is the action taken in the current state, rewards is a matrix of rewards for each state and action, next_states is a matrix of next states for each state and action, gamma is the discount factor, and optimal_action() is a function for selecting the optimal action in a given state.
+
+Finally, we provide Pseudocode for Sample Average Approximation.
+
+Pseudocode for sample average approximation is an iterative method for estimating the value of a function. Sample average approximation estimates the value of a function by taking the average of a set of samples of the function.
+
+The pseudocode for sample average approximation is as follows:
+
+SampleAverageApproximation(function, num_samples)
+    
+    # Initialize the sum of the function values to zero
+    sum_values = 0
+
+    # Take num_samples samples of the function
+    for i in range(num_samples):
+        x = random_sample()
+        sum_values += function(x)
+
+    # Compute the average of the function values
+    average_value = sum_values / num_samples
+
+    return average_value
+
+
+In this pseudocode, function is the function to be estimated, num_samples is the number of samples to take, and random_sample() is a function for generating a random sample of the function.
+
+Hopefully, providing this pseudocode for you will help you in writing your own programs!
 
 # Discussion
 
