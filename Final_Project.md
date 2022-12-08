@@ -58,7 +58,41 @@ This formula represents the sample average approximation of a function $f(x)$ at
 
 The sample average approximation is a simple and computationally efficient method for estimating the value of a function at a particular point based on a set of sample data. One of the main advantages of this method is that it is easy to implement and requires only basic mathematical operations, making it a good choice for applications where computational resources are limited or time is of the essence.
 
-However, the sample average approximation also has some limitations. One major disadvantage is that it can be highly sensitive to the choice of sample points, which can lead to significant errors in the estimated function values if the sample points are not carefully chosen. Additionally, the sample average approximation is only an estimate of the true function value, and it is generally not as accurate as other more sophisticated approximation methods, such as polynomial regression or spline interpolation.
+However, the sample average approximation also has some limitations. One major disadvantage is that it can be highly sensitive to the choice of sample points, which can lead to significant errors in the estimated function values if the sample points are not carefully chosen. Additionally, the sample average approximation is only an estimate of the true function value, and it is generally not as accurate as other more sophisticated approximation methods, such as polynomial regression or spline interpolation. 
+
+We will now prove that this estimator is consistent, a common tool and metric widely used in numerical analysis and econometrics. 
+
+To prove the consistency of sample average approximation, we must first define some notation. Let the random variable $X$ be distributed according to the probability distribution $P$, and let the function $f$ be a real-valued function defined on the sample space of $X$. The expected value of $f$ with respect to $P$ is denoted as $E[f(X)]$.
+
+To prove the consistency of sample average approximation, we must show that as the size of the sample used to approximate the expected value of $f$ increases, the error between the sample average and the true expected value decreases. This can be formalized as follows:
+
+Suppose that we have a sequence of samples of increasing size, denoted as $S_1$, $S_2$, $S_3$, $\dots$, where $S_n$ is a sample of size $n$ drawn from the distribution $P$. We can then define the error between the sample average and the true expected value at each step in the sequence as follows:
+
+$Err(S_n) = \left|E[f(X)] - \operatorname{avg}(f(S))\right|$
+
+where $\operatorname{avg}(f(S))$ is the average value of the function $f$ over the sample $S$.
+
+To prove that the error decreases as the size of the sample increases, we must show that the sequence $Err(S_n)$ is a non-increasing sequence. That is, we must show that $Err(S_{n+1}) \leq Err(S_n)$ for all $n$.
+
+To do this, we can use the triangle inequality to expand the definition of $Err(S_{n+1})$ as follows:
+
+$Err(S_{n+1}) = \left|E[f(X)] - \operatorname{avg}(f(S))\right| = \left|E[f(X)] - \left(\operatorname{avg}(f(S)) - \left(f(x_{n+1}) - \operatorname{avg}(f(S))\right)\right)\right|$
+
+where $x_{n+1}$ is the $(n+1)$th element of the sample $S$.
+
+Applying the triangle inequality, we have:
+
+$Err(S_{n+1}) \leq \left|E[f(X)] - \operatorname{avg}(f(S))\right| + \left|\operatorname{avg}(f(S)) - \left(f(x_{n+1}) - \operatorname{avg}(f(S))\right)\right|$
+
+$= Err(S_n) + \left|\operatorname{avg}(f(S)) - \left(f(x_{n+1}) - \operatorname{avg}(f(S))\right)\right|$
+
+Since $\left|\operatorname{avg}(f(S)) - \left(f(x_{n+1}) - \operatorname{avg}(f(S))\right)\right|$ is always a non-negative quantity, we have:
+
+$Err(S_{n+1}) \leq Err(S_n)$
+
+This shows that the error between the sample average and the true expected value decreases as the size of the sample increases, and therefore the sample average approximation method is consistent.
+
+In other words, as the size of the sample increases, the sample average converges to the true expected value of the function $f$ with respect to the probability distribution $P$.
 
 Overall, the sample average approximation is a useful tool for approximating the value of a function at a particular point, but it should not be relied upon for highly accurate results in all cases. It is best used in situations where computational efficiency and simplicity are more important than the absolute accuracy of the approximation.
 
@@ -114,8 +148,8 @@ In my own research field within medical decision making, SO is still widely used
 # References
 1. Tian, Z., Han, W., & Powell, W. B. (2022). Adaptive learning of drug quality and optimization of patient recruitment for clinical trials with dropouts. Manufacturing & Service Operations Management, 24(1), 580-599.https://doi.org/10.1287/msom.2020.0936
 2. Puterman, M. L. (2014). Markov decision processes: discrete stochastic dynamic programming. John Wiley & Sons.
-3. Garcia, G. G. P., Steimle, L. N., Marrero, W. J., & Sussman, J. B. An Analysis of Structured Optimal Policies for Hypertension Treatment Planning: The Tradeoff Between Optimality and Interpretability.
-4. Alagoz, O., Hsu, H., Schaefer, A. J., & Roberts, M. S. (2010). Markov decision processes: a tool for sequential decision making under uncertainty. Medical Decision Making, 30(4), 474-483.
+3. Garcia, G. G. P., Steimle, L. N., Marrero, W. J., & Sussman, J. B. An Analysis of Structured Optimal Policies for Hypertension Treatment Planning: The Tradeoff Between Optimality and Interpretability. https://optimization-online.org/?p=17279
+4. Alagoz, O., Hsu, H., Schaefer, A. J., & Roberts, M. S. (2010). Markov decision processes: a tool for sequential decision making under uncertainty. Medical Decision Making, 30(4), 474-483. [HTML] from nih.gov
 5. Siebert, U., Alagoz, O., Bayoumi, A. M., Jahn, B., Owens, D. K., Cohen, D. J., & Kuntz, K. M. (2012). State-transition modeling: a report of the ISPOR-SMDM modeling good research practices task force–3. Medical Decision Making, 32(5), 690-700.
-6. Ajayi, T., Lee, T., & Schaefer, A. J. (2022). Objective selection for cancer treatment: an inverse optimization approach. Operations Research.
+6. Ajayi, T., Lee, T., & Schaefer, A. J. (2022). Objective selection for cancer treatment: an inverse optimization approach. Operations Research.[PDF] from optimization-online.org
 7. Ajayi, T., Hosseinian, S., Schaefer, A. J., & Fuller, C. D. (2021). Combination Chemotherapy Optimization with Discrete Dosing. arXiv preprint arXiv:2111.02000.
