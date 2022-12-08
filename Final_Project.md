@@ -126,7 +126,7 @@ $$V^{\pi}(s) = \sum_{a \in \mathcal{A}} \pi(a | s) \sum_{s' \in \mathcal{S}} p(s
 
 This equation describes the value of a state $s$ under a particular policy $\pi$ in a Markov decision process (MDP). The value of the state is the expected long-term reward of following the policy, taking into account the probabilities of transitioning to other states and the rewards associated with those transitions. The discount factor $\gamma$ is used to balance the importance of immediate rewards versus long-term rewards.
 
-Bellman's equation has many important applications in fields such as reinforcement learning, operations research, and artificial intelligence. It provides a fundamental framework for solving MDPs, and it has been used to develop many powerful algorithms for solving complex decision-making and control problems.
+Bellman's equation has many important applications in fields such as reinforcement learning, operations research, and artificial intelligence. It provides a fundamental framework for solving MDPs, and it has been used to develop many powerful algorithms for solving complex decision-making and control problems. For applicable real-world problems solved using these methods, see Alagoz (2010), Ajayi (2021), and Alagoz (2012).
 
 Finally, we will look at one more equation that is known for Value policy iteration. 
 
